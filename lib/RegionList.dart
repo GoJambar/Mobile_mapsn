@@ -32,7 +32,7 @@ class _RegionListState extends State<RegionList> {
                           children: [
                             Container(
                               child: Image.network(
-                                'http://e215-154-124-66-161.ngrok.io/api/region/imageRegion/$id',
+                                'http://5bad-41-219-31-181.ngrok.io/api/region/imageRegion/$id',
                                 width: 400,
                                 height: 250,
                                 fit: BoxFit.cover,
@@ -83,8 +83,8 @@ class _RegionListState extends State<RegionList> {
     fetch();
   }
 
-  void fetch() {
-    var url = Uri.parse('http://e215-154-124-66-161.ngrok.io/regions');
+  Future<void> fetch() async {
+    var url = Uri.parse('http://5bad-41-219-31-181.ngrok.io/regions');
     http.get(url).then((resp) {
       setState(() {
         region = jsonDecode(resp.body)["_embedded"]["regions"];

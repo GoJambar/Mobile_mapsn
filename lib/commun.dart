@@ -58,7 +58,7 @@ class _CommunListState extends State<CommunList> {
     loadCommun();
   }
 
-  void loadCommun() {
+  Future<void> loadCommun() async {
     var url = this.widget.commun["_links"]["commun"]["href"];
     var uri = Uri.parse(url);
     http.get(uri).then((resp) {

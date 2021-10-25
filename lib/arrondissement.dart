@@ -59,7 +59,7 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
     loadDepartement();
   }
 
-  void loadDepartement() {
+  Future<void> loadDepartement() async {
     var url = this.widget.arrondisment["_links"]["arron"]["href"];
     var uri = Uri.parse(url);
     http.get(uri).then((resp) {

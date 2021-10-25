@@ -59,7 +59,7 @@ class _DepartementState extends State<Departement> {
     loadDepartement();
   }
 
-  void loadDepartement() {
+  Future<void> loadDepartement() async {
     var url = this.widget.depart["_links"]["depart"]["href"];
     var uri = Uri.parse(url);
     http.get(uri).then((resp) {
