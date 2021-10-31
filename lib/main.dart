@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mapsn/regionList.dart';
+import 'package:mapsn/screens/RegionList.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        color: Colors.white,
         debugShowCheckedModeBanner: false,
         title: 'Bienvenue au Sénégal',
         home: SplashScreen());
@@ -23,8 +24,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // ignore: todo
-    // TODO: implement initState
     super.initState();
     Timer(Duration(seconds: 5), () {
       Navigator.of(context)
@@ -43,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/carte.png',
+              'assets/images/splash.png',
               height: 120,
             ),
             SizedBox(
