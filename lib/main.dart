@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mapsn/screens/RegionList.dart';
+import 'package:mapsn/screens/splashsreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
         color: Colors.white,
         debugShowCheckedModeBanner: false,
         title: 'Bienvenue au Sénégal',
-        home: SplashScreen());
+        home: Splash());
   }
 }
 
