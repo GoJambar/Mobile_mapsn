@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mapsn/model/region.dart';
-import 'package:mapsn/page/arrondissement_list_page.dart';
+import 'package:mapsn/page/region/arrondissement_list_page.dart';
 
 // ignore: must_be_immutable
 class Departement extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mapsn/model/region.dart';
-import 'package:mapsn/page/arrondissement_list_page.dart';
+import 'package:mapsn/page/departement/arrondissement_list_page.dart';
 
 // ignore: must_be_immutable
 class DepartementDetail extends StatefulWidget {
@@ -11,7 +11,7 @@ class DepartementDetail extends StatefulWidget {
 }
 
 class _DepartementDetailState extends State<DepartementDetail> {
-  List<Arron>? listeDepartment;
+  List<Arron>? listArron;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _DepartementDetailState extends State<DepartementDetail> {
         elevation: 0,
         title: Center(
           child: Text(
-            'dept de ${widget.dept.name}',
+            'Departement de ${widget.dept.name}',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
@@ -75,7 +75,7 @@ class _DepartementDetailState extends State<DepartementDetail> {
                     border: Border(
                         bottom: BorderSide(color: Colors.black, width: 2))),
                 child: Text(
-                  'Liste des Departement de ${widget.dept.name} ',
+                  'Liste des Arondissements de ${widget.dept.name} ',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.black,
@@ -89,10 +89,10 @@ class _DepartementDetailState extends State<DepartementDetail> {
               Expanded(
                 child: Center(
                   // ignore: unnecessary_null_comparison
-                  child: this.listeDepartment == null
+                  child: this.listArron == null
                       ? CircularProgressIndicator()
                       : ListView.builder(
-                          itemCount: listeDepartment!.length,
+                          itemCount: listArron!.length,
                           itemBuilder: (context, index) {
                             //DepartementDetail departments = department![index];
                             return GestureDetector(
@@ -103,7 +103,7 @@ class _DepartementDetailState extends State<DepartementDetail> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Center(
                                     child: Text(
-                                      listeDepartment![index].name.toString(),
+                                      listArron![index].name.toString(),
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -111,16 +111,16 @@ class _DepartementDetailState extends State<DepartementDetail> {
                                   ),
                                 ),
                               ),
-                              onTap: null,
-                              // () {
-                              //   Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) => new ArrondissmentPage(
-                              //           depart: listeDepartment![index]),
-                              //     ),
-                              //   );
-                              // },
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => new ArrondissmentPage(
+                                      arron: listArron![index],
+                                    ),
+                                  ),
+                                );
+                              },
                             );
                           }),
                 ),
@@ -136,7 +136,7 @@ class _DepartementDetailState extends State<DepartementDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    listeDepartment = widget.dept.arron;
+    listArron = widget.dept.arron;
     // loadDepartementDetail();
   }
 }

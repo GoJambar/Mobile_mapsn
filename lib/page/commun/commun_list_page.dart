@@ -1,18 +1,21 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:mapsn/api/department_api.dart';
+import 'package:mapsn/api/commun_api.dart';
 import 'package:mapsn/model/region.dart';
-import 'package:mapsn/page/departement/departement_detail_page.dart';
+
+import 'package:mapsn/page/commun/commun_detail_page.dart';
+
 import 'package:mapsn/widget/search_widget.dart';
 
-class DepartListPage extends StatefulWidget {
+class CommunListPage extends StatefulWidget {
   @override
-  DepartListPageState createState() => DepartListPageState();
+  CommunListPageState createState() => CommunListPageState();
 }
 
-class DepartListPageState extends State<DepartListPage> {
-  List<Depart> departs = [];
+class CommunListPageState extends State<CommunListPage> {
+  List<Commun> communs = [];
   String query = '';
   Timer? debouncer;
 
@@ -41,9 +44,11 @@ class DepartListPageState extends State<DepartListPage> {
   }
 
   Future init() async {
-    final reg = await DepartsApi.getDepart(query);
+    final com = await CommunsApi.getCommun(query);
 
-    setState(() => this.departs = reg);
+    //print('communs :${reg[0].depart}');
+
+    setState(() => this.communs = com);
   }
 
   @override
@@ -53,7 +58,7 @@ class DepartListPageState extends State<DepartListPage> {
             header(),
             buildSearch(),
             Expanded(
-              child: gridDepart(departs: departs),
+              child: gridDepart(communs: communs),
             ),
           ],
         ),
@@ -61,20 +66,25 @@ class DepartListPageState extends State<DepartListPage> {
 
   Widget buildSearch() => SearchWidget(
         text: query,
-        hintText: 'Nom du departement',
+        hintText: 'Nom de la commun',
         onChanged: searchBook,
       );
 
   Future searchBook(String query) async => debounce(() async {
-        final dept = await DepartsApi.getDepart(query);
+        final comm = await CommunsApi.getCommun(query);
 
         if (!mounted) return;
 
         setState(() {
           this.query = query;
-          this.departs = dept;
+          this.communs = comm;
         });
       });
+
+  // Widget buildBook(ListRegionResponse book) => ListTile(
+  //       title: Text(book.g),
+  //       subtitle: Text(book.detail),
+  //     );
 
   Widget header() => Container(
         width: double.infinity,
@@ -124,23 +134,23 @@ class DepartListPageState extends State<DepartListPage> {
 class gridDepart extends StatelessWidget {
   const gridDepart({
     Key? key,
-    required this.departs,
+    required this.communs,
   }) : super(key: key);
 
-  final List<Depart> departs;
+  final List<Commun> communs;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: this.departs.length == 0
+        child: this.communs.length == 0
             ? CircularProgressIndicator()
             : GridView.builder(
-                itemCount: departs.length,
+                itemCount: communs.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4),
                 itemBuilder: (context, index) {
-                  int? id = departs[index].id;
-                  String? name = departs[index].name;
+                  int? id = communs[index].id;
+                  String? name = communs[index].name;
                   return GestureDetector(
                     child: Card(
                       color: Colors.grey[500],
@@ -161,9 +171,8 @@ class gridDepart extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => new DepartementDetail(
-                            dept: departs[index],
-                          ),
+                          builder: (context) =>
+                              new CommunDetail(commun: communs[index]),
                         ),
                       );
                     },

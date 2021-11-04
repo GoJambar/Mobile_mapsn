@@ -10,7 +10,6 @@ class CommunList extends StatefulWidget {
 }
 
 class _CommunListState extends State<CommunList> {
-  List<Commun>? listCommun;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,60 +68,6 @@ class _CommunListState extends State<CommunList> {
               SizedBox(
                 height: 30,
               ),
-              // Container(
-              //   decoration: BoxDecoration(
-              //       border: Border(
-              //           bottom: BorderSide(color: Colors.black, width: 2))),
-              //   child: Text(
-              //     'Liste des Commun de ${widget.commun.name} ',
-              //     style: TextStyle(
-              //         fontSize: 15,
-              //         color: Colors.black,
-              //         fontWeight: FontWeight.bold),
-              //     textAlign: TextAlign.left,
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // Expanded(
-              //   child: Center(
-              //     // ignore: unnecessary_null_comparison
-              //     child: this.listCommun == null
-              //         ? CircularProgressIndicator()
-              //         : ListView.builder(
-              //             itemCount: listCommun!.length,
-              //             itemBuilder: (context, index) {
-              //               //Departement departments = department![index];
-              //               return GestureDetector(
-              //                 child: Card(
-              //                   color: Colors.grey[500],
-              //                   margin: EdgeInsets.all(20),
-              //                   child: Padding(
-              //                     padding: const EdgeInsets.all(8.0),
-              //                     child: Center(
-              //                       child: Text(
-              //                         listCommun![index].name.toString(),
-              //                         style: TextStyle(
-              //                             color: Colors.white,
-              //                             fontWeight: FontWeight.bold),
-              //                       ),
-              //                     ),
-              //                   ),
-              //                 ),
-              //                 // onTap: () {
-              //                 //   Navigator.push(
-              //                 //     context,
-              //                 //     MaterialPageRoute(
-              //                 //       builder: (context) =>
-              //                 //           new CommunList(listCommun![index]),
-              //                 //     ),
-              //                 //   );
-              //                 // },
-              //               );
-              //             }),
-              //   ),
-              // )
             ],
           ),
         ),

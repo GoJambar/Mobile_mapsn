@@ -1,18 +1,21 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:mapsn/api/department_api.dart';
+import 'package:mapsn/api/arrondissement_api.dart';
 import 'package:mapsn/model/region.dart';
-import 'package:mapsn/page/departement/departement_detail_page.dart';
+import 'package:mapsn/page/arrondissement/arron_detail_page.dart';
 import 'package:mapsn/widget/search_widget.dart';
 
-class DepartListPage extends StatefulWidget {
+class ArronListPage extends StatefulWidget {
+  //ArronListPage(MaterialColor blue);
+
   @override
-  DepartListPageState createState() => DepartListPageState();
+  ArronListPageState createState() => ArronListPageState();
 }
 
-class DepartListPageState extends State<DepartListPage> {
-  List<Depart> departs = [];
+class ArronListPageState extends State<ArronListPage> {
+  List<Arron> arrons = [];
   String query = '';
   Timer? debouncer;
 
@@ -41,9 +44,11 @@ class DepartListPageState extends State<DepartListPage> {
   }
 
   Future init() async {
-    final reg = await DepartsApi.getDepart(query);
+    final arron = await ArronsApi.getArron(query);
 
-    setState(() => this.departs = reg);
+    //print('arrons :${reg[0].depart}');
+
+    setState(() => this.arrons = arron);
   }
 
   @override
@@ -53,7 +58,7 @@ class DepartListPageState extends State<DepartListPage> {
             header(),
             buildSearch(),
             Expanded(
-              child: gridDepart(departs: departs),
+              child: gridDepart(arrons: arrons),
             ),
           ],
         ),
@@ -61,20 +66,25 @@ class DepartListPageState extends State<DepartListPage> {
 
   Widget buildSearch() => SearchWidget(
         text: query,
-        hintText: 'Nom du departement',
+        hintText: 'Arrondissement',
         onChanged: searchBook,
       );
 
   Future searchBook(String query) async => debounce(() async {
-        final dept = await DepartsApi.getDepart(query);
+        final dept = await ArronsApi.getArron(query);
 
         if (!mounted) return;
 
         setState(() {
           this.query = query;
-          this.departs = dept;
+          this.arrons = dept;
         });
       });
+
+  // Widget buildBook(ListRegionResponse book) => ListTile(
+  //       title: Text(book.g),
+  //       subtitle: Text(book.detail),
+  //     );
 
   Widget header() => Container(
         width: double.infinity,
@@ -124,23 +134,25 @@ class DepartListPageState extends State<DepartListPage> {
 class gridDepart extends StatelessWidget {
   const gridDepart({
     Key? key,
-    required this.departs,
+    required this.arrons,
   }) : super(key: key);
 
-  final List<Depart> departs;
+  final List<Arron> arrons;
 
   @override
   Widget build(BuildContext context) {
+    //print('dept :${this.arrons}');
+
     return Center(
-        child: this.departs.length == 0
+        child: this.arrons.length == 0
             ? CircularProgressIndicator()
             : GridView.builder(
-                itemCount: departs.length,
+                itemCount: arrons.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4),
                 itemBuilder: (context, index) {
-                  int? id = departs[index].id;
-                  String? name = departs[index].name;
+                  int? id = arrons[index].id;
+                  String? name = arrons[index].name;
                   return GestureDetector(
                     child: Card(
                       color: Colors.grey[500],
@@ -161,9 +173,8 @@ class gridDepart extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => new DepartementDetail(
-                            dept: departs[index],
-                          ),
+                          builder: (context) =>
+                              new ArronDetail(arron: arrons[index]),
                         ),
                       );
                     },

@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mapsn/model/region.dart';
-import 'package:mapsn/page/region/commun_list_page.dart';
+import 'package:mapsn/page/arrondissement/commun_list_page.dart';
 
-class ArrondissmentPage extends StatefulWidget {
-  Depart depart;
-  ArrondissmentPage({required this.depart});
-
-  // late Depart depart;
-  // ArrondissmentPage(Depart depart, {required Depart depart});
+class ArronDetail extends StatefulWidget {
+  Arron arron;
+  ArronDetail({required this.arron});
 
   @override
-  _ArrondissmentPageState createState() => _ArrondissmentPageState();
+  _ArronDetailState createState() => _ArronDetailState();
 }
 
-class _ArrondissmentPageState extends State<ArrondissmentPage> {
-  List<Arron>? listeArrondissement;
+class _ArronDetailState extends State<ArronDetail> {
+  List<Commun>? listCommun;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +21,7 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
         elevation: 0,
         title: Center(
           child: Text(
-            'Departement de ${widget.depart.name}',
+            'Arrondissement de ${widget.arron.name}',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
@@ -78,7 +75,7 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
                     border: Border(
                         bottom: BorderSide(color: Colors.black, width: 2))),
                 child: Text(
-                  'Liste des Arrondissements de ${widget.depart.name} ',
+                  'Liste des Communs de ${widget.arron.name} ',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.black,
@@ -92,12 +89,12 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
               Expanded(
                 child: Center(
                   // ignore: unnecessary_null_comparison
-                  child: this.listeArrondissement == null
+                  child: this.listCommun == null
                       ? CircularProgressIndicator()
                       : ListView.builder(
-                          itemCount: listeArrondissement!.length,
+                          itemCount: listCommun!.length,
                           itemBuilder: (context, index) {
-                            //Departement departments = department![index];
+                            //ArronDetail departments = department![index];
                             return GestureDetector(
                               child: Card(
                                 color: Colors.grey[500],
@@ -106,9 +103,7 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Center(
                                     child: Text(
-                                      listeArrondissement![index]
-                                          .name
-                                          .toString(),
+                                      listCommun![index].name.toString(),
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -121,7 +116,8 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => new CommunList(
-                                        listeArrondissement![index]),
+                                      commun: listCommun![index],
+                                    ),
                                   ),
                                 );
                               },
@@ -138,8 +134,7 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    listeArrondissement = widget.depart.arron;
+    listCommun = widget.arron.commun;
   }
 }
