@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mapsn/model/region.dart';
-import 'package:mapsn/page/arrondissement_list_page.dart';
 
-// ignore: must_be_immutable
-class Departement extends StatefulWidget {
-  ListRegionReponse region;
-  Departement({required this.region});
+class CommunList extends StatefulWidget {
+  Arron arron;
+
+  CommunList(this.arron);
 
   @override
-  _DepartementState createState() => _DepartementState();
+  _CommunListState createState() => _CommunListState();
 }
 
-class _DepartementState extends State<Departement> {
-  List<Depart>? listeDepartment;
+class _CommunListState extends State<CommunList> {
+  List<Commun>? listCommun;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class _DepartementState extends State<Departement> {
         elevation: 0,
         title: Center(
           child: Text(
-            'Region de ${widget.region.name}',
+            'Arrondissement de ${widget.arron.name}',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
@@ -76,7 +75,7 @@ class _DepartementState extends State<Departement> {
                     border: Border(
                         bottom: BorderSide(color: Colors.black, width: 2))),
                 child: Text(
-                  'Liste des Departement de ${widget.region.name} ',
+                  'Liste des Commun de ${widget.arron.name} ',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.black,
@@ -90,10 +89,10 @@ class _DepartementState extends State<Departement> {
               Expanded(
                 child: Center(
                   // ignore: unnecessary_null_comparison
-                  child: this.listeDepartment == null
+                  child: this.listCommun == null
                       ? CircularProgressIndicator()
                       : ListView.builder(
-                          itemCount: listeDepartment!.length,
+                          itemCount: listCommun!.length,
                           itemBuilder: (context, index) {
                             //Departement departments = department![index];
                             return GestureDetector(
@@ -104,7 +103,7 @@ class _DepartementState extends State<Departement> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Center(
                                     child: Text(
-                                      listeDepartment![index].name.toString(),
+                                      listCommun![index].name.toString(),
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -112,15 +111,15 @@ class _DepartementState extends State<Departement> {
                                   ),
                                 ),
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => new ArrondissmentPage(
-                                        depart: listeDepartment![index]),
-                                  ),
-                                );
-                              },
+                              // onTap: () {
+                              //   Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) =>
+                              //           new CommunList(listCommun![index]),
+                              //     ),
+                              //   );
+                              // },
                             );
                           }),
                 ),
@@ -136,7 +135,6 @@ class _DepartementState extends State<Departement> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    listeDepartment = widget.region.depart;
-    // loadDepartement();
+    listCommun = widget.arron.commun;
   }
 }

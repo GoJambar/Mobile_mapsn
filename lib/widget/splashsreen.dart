@@ -73,11 +73,11 @@ class _MainPageState extends State<MainPage> {
       currentIndex: index,
       items: [
         BottomNavigationBarItem(
-          icon: Text('Filter List', style: style),
+          icon: Text('REGIONS', style: style),
           label: 'Local',
         ),
         BottomNavigationBarItem(
-          icon: Text('Filter List', style: style),
+          icon: Text('Departement', style: style),
           label: 'Network',
         ),
       ],
@@ -90,7 +90,7 @@ class _MainPageState extends State<MainPage> {
       case 0:
         return RegionListPage();
       case 1:
-        return FilterLocalListPage();
+        return DepartListPage();
       default:
         return Container();
     }
