@@ -1,60 +1,25 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:mapsn/screens/RegionList.dart';
-import 'package:mapsn/screens/splashsreen.dart';
+import 'package:flutter/services.dart';
+import 'package:mapsn/widget/splashsreen.dart';
 
-void main() => runApp(MyApp());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  static final String title = 'Region Liste';
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        color: Colors.white,
+  Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Bienvenue au Sénégal',
-        home: Splash());
-  }
-}
-
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(Duration(seconds: 5), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => RegionList()
-              // DepartementList(),
-              ));
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.green[700],
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/splash.png',
-              height: 120,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+        title: title,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: Splash(),
+      );
 }

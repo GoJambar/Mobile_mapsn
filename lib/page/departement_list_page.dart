@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:mapsn/model/region.dart';
+import 'package:mapsn/page/arrondissement_list_page.dart';
 
-class CommunList extends StatefulWidget {
-  dynamic commun;
-  CommunList(this.commun);
+// ignore: must_be_immutable
+class Departement extends StatefulWidget {
+  ListRegionReponse region;
+  Departement({required this.region});
+
   @override
-  _CommunListState createState() => _CommunListState();
+  _DepartementState createState() => _DepartementState();
 }
 
-class _CommunListState extends State<CommunList> {
-  List<dynamic>? listCommun;
+class _DepartementState extends State<Departement> {
+  List<Depart>? listeDepartment;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +22,7 @@ class _CommunListState extends State<CommunList> {
         elevation: 0,
         title: Center(
           child: Text(
-            'Arrondissement de ${widget.commun['name']}',
+            'Region de ${widget.region.name}',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
@@ -74,7 +76,7 @@ class _CommunListState extends State<CommunList> {
                     border: Border(
                         bottom: BorderSide(color: Colors.black, width: 2))),
                 child: Text(
-                  'Liste des Commun de ${widget.commun['name']} ',
+                  'Liste des Departement de ${widget.region.name} ',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.black,
@@ -88,10 +90,10 @@ class _CommunListState extends State<CommunList> {
               Expanded(
                 child: Center(
                   // ignore: unnecessary_null_comparison
-                  child: this.listCommun == null
+                  child: this.listeDepartment == null
                       ? CircularProgressIndicator()
                       : ListView.builder(
-                          itemCount: listCommun!.length,
+                          itemCount: listeDepartment!.length,
                           itemBuilder: (context, index) {
                             //Departement departments = department![index];
                             return GestureDetector(
@@ -102,7 +104,7 @@ class _CommunListState extends State<CommunList> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Center(
                                     child: Text(
-                                      listCommun![index]["name"],
+                                      listeDepartment![index].name.toString(),
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -110,15 +112,15 @@ class _CommunListState extends State<CommunList> {
                                   ),
                                 ),
                               ),
-                              // onTap: () {
-                              //   Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) =>
-                              //           new CommunList(listCommun![index]),
-                              //     ),
-                              //   );
-                              // },
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => new ArrondissmentPage(
+                                        depart: listeDepartment![index]),
+                                  ),
+                                );
+                              },
                             );
                           }),
                 ),
@@ -134,19 +136,7 @@ class _CommunListState extends State<CommunList> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadCommun();
-  }
-
-  Future<void> loadCommun() async {
-    var url = this.widget.commun["_links"]["commun"]["href"];
-    var uri = Uri.parse(url);
-    http.get(uri).then((resp) {
-      setState(() {
-        this.listCommun = jsonDecode(resp.body)["_embedded"]["communs"];
-        //print(listCommun);
-      });
-    }).catchError((onError) {
-      print(onError);
-    });
+    listeDepartment = widget.region.depart;
+    // loadDepartement();
   }
 }

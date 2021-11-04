@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:mapsn/screens/commun.dart';
+import 'package:mapsn/model/region.dart';
 
-class ArrondissmentPage extends StatefulWidget {
-  dynamic arrondisment;
-  ArrondissmentPage(this.arrondisment);
+class CommunList extends StatefulWidget {
+  Arron arron;
+
+  CommunList(this.arron);
+
   @override
-  _ArrondissmentPageState createState() => _ArrondissmentPageState();
+  _CommunListState createState() => _CommunListState();
 }
 
-class _ArrondissmentPageState extends State<ArrondissmentPage> {
-  List<dynamic>? listeArrondissement;
+class _CommunListState extends State<CommunList> {
+  List<Commun>? listCommun;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
         elevation: 0,
         title: Center(
           child: Text(
-            'Departement de ${widget.arrondisment['name']}',
+            'Arrondissement de ${widget.arron.name}',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
@@ -75,7 +75,7 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
                     border: Border(
                         bottom: BorderSide(color: Colors.black, width: 2))),
                 child: Text(
-                  'Liste des Arrondissements de ${widget.arrondisment['name']} ',
+                  'Liste des Commun de ${widget.arron.name} ',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.black,
@@ -89,10 +89,10 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
               Expanded(
                 child: Center(
                   // ignore: unnecessary_null_comparison
-                  child: this.listeArrondissement == null
+                  child: this.listCommun == null
                       ? CircularProgressIndicator()
                       : ListView.builder(
-                          itemCount: listeArrondissement!.length,
+                          itemCount: listCommun!.length,
                           itemBuilder: (context, index) {
                             //Departement departments = department![index];
                             return GestureDetector(
@@ -103,7 +103,7 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Center(
                                     child: Text(
-                                      listeArrondissement![index]["name"],
+                                      listCommun![index].name.toString(),
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -111,15 +111,15 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
                                   ),
                                 ),
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => new CommunList(
-                                        listeArrondissement![index]),
-                                  ),
-                                );
-                              },
+                              // onTap: () {
+                              //   Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) =>
+                              //           new CommunList(listCommun![index]),
+                              //     ),
+                              //   );
+                              // },
                             );
                           }),
                 ),
@@ -135,20 +135,6 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadDepartement();
-  }
-
-  Future<void> loadDepartement() async {
-    var url = this.widget.arrondisment["_links"]["arron"]["href"];
-    var uri = Uri.parse(url);
-    http.get(uri).then((resp) {
-      setState(() {
-        this.listeArrondissement =
-            jsonDecode(resp.body)["_embedded"]["arrondissements"];
-        //  print(listeArrondissement);
-      });
-    }).catchError((onError) {
-      print(onError);
-    });
+    listCommun = widget.arron.commun;
   }
 }

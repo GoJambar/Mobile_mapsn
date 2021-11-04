@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:mapsn/screens/arrondissement.dart';
+import 'package:mapsn/model/region.dart';
+import 'package:mapsn/page/commun_list_page.dart';
 
-class Departement extends StatefulWidget {
-  dynamic depart;
-  Departement(this.depart);
+class ArrondissmentPage extends StatefulWidget {
+  Depart depart;
+  ArrondissmentPage({required this.depart});
+
+  // late Depart depart;
+  // ArrondissmentPage(Depart depart, {required Depart depart});
+
   @override
-  _DepartementState createState() => _DepartementState();
+  _ArrondissmentPageState createState() => _ArrondissmentPageState();
 }
 
-class _DepartementState extends State<Departement> {
-  List<dynamic>? listeDepartment;
+class _ArrondissmentPageState extends State<ArrondissmentPage> {
+  List<Arron>? listeArrondissement;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +24,7 @@ class _DepartementState extends State<Departement> {
         elevation: 0,
         title: Center(
           child: Text(
-            'Region de ${widget.depart['name']}',
+            'Departement de ${widget.depart.name}',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
@@ -75,7 +78,7 @@ class _DepartementState extends State<Departement> {
                     border: Border(
                         bottom: BorderSide(color: Colors.black, width: 2))),
                 child: Text(
-                  'Liste des Departement de ${widget.depart['name']} ',
+                  'Liste des Arrondissements de ${widget.depart.name} ',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.black,
@@ -89,10 +92,10 @@ class _DepartementState extends State<Departement> {
               Expanded(
                 child: Center(
                   // ignore: unnecessary_null_comparison
-                  child: this.listeDepartment == null
+                  child: this.listeArrondissement == null
                       ? CircularProgressIndicator()
                       : ListView.builder(
-                          itemCount: listeDepartment!.length,
+                          itemCount: listeArrondissement!.length,
                           itemBuilder: (context, index) {
                             //Departement departments = department![index];
                             return GestureDetector(
@@ -103,7 +106,9 @@ class _DepartementState extends State<Departement> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Center(
                                     child: Text(
-                                      listeDepartment![index]["name"],
+                                      listeArrondissement![index]
+                                          .name
+                                          .toString(),
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -115,8 +120,8 @@ class _DepartementState extends State<Departement> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => new ArrondissmentPage(
-                                        listeDepartment![index]),
+                                    builder: (context) => new CommunList(
+                                        listeArrondissement![index]),
                                   ),
                                 );
                               },
@@ -135,20 +140,6 @@ class _DepartementState extends State<Departement> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadDepartement();
-  }
-
-  Future<void> loadDepartement() async {
-    var url = this.widget.depart["_links"]["depart"]["href"];
-    var uri = Uri.parse(url);
-    http.get(uri).then((resp) {
-      setState(() {
-        this.listeDepartment =
-            jsonDecode(resp.body)["_embedded"]["departements"];
-        //print(listeDepartment);
-      });
-    }).catchError((onError) {
-      print(onError);
-    });
+    listeArrondissement = widget.depart.arron;
   }
 }
