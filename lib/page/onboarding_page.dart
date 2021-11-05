@@ -77,7 +77,7 @@ class OnBoardingPage extends StatelessWidget {
   PageDecoration getPageDecoration() => PageDecoration(
         titleTextStyle: TextStyle(
             fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blue),
-        bodyTextStyle: TextStyle(fontSize: 16),
+        bodyTextStyle: TextStyle(fontSize: 20),
         descriptionPadding: EdgeInsets.all(16).copyWith(bottom: 0),
         imagePadding: EdgeInsets.all(24),
         pageColor: Colors.white,
