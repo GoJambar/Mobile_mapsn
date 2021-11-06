@@ -4,8 +4,7 @@ import 'package:mapsn/model/region.dart';
 
 class CommunsApi {
   static Future<List<Commun>> getCommun(String query) async {
-    final url =
-        Uri.parse('http://831a-154-125-255-70.ngrok.io/api/arrondissements');
+    final url = Uri.parse('http://localhost:8080/api/arrondissements');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
