@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mapsn/page/onboarding_page.dart';
 import 'package:mapsn/widget/splashsreen.dart';
 
 Future main() async {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: title,
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: Splash(),
+        home: OnBoardingPage(),
+        //Splash(),
       );
 }

@@ -1,12 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mapsn/api/region_api.dart';
 import 'package:mapsn/model/region.dart';
-import 'package:mapsn/page/region/departement_list_page.dart';
 import 'package:mapsn/widget/search_widget.dart';
+
+import 'departement_list_page.dart';
 
 class RegionListPage extends StatefulWidget {
   //RegionListPage(MaterialColor green);
@@ -115,7 +116,7 @@ class RegionListPageState extends State<RegionListPage> {
                                               child: Container(
                                                 child: Center(
                                                   child: Image.network(
-                                                    'http://831a-154-125-255-70.ngrok.io/api/region/imageRegion/$id',
+                                                    'http://localhost:8080/api/region/imageRegion/$id',
                                                     height: 160,
                                                     width: 160,
                                                     fit: BoxFit.cover,
@@ -180,7 +181,7 @@ class RegionListPageState extends State<RegionListPage> {
 
   Widget buildSearch() => SearchWidget(
         text: query,
-        hintText: 'Nom du region',
+        hintText: 'Nom de la region',
         onChanged: searchBook,
       );
 
