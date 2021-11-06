@@ -4,7 +4,8 @@ import 'package:mapsn/model/region.dart';
 
 class DepartsApi {
   static Future<List<Depart>> getDepart(String query) async {
-    final url = Uri.parse('http://localhost:8080/api/departements');
+    final url =
+        Uri.parse('http://localhost:8080/api/departements');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

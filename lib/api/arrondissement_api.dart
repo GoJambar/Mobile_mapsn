@@ -4,7 +4,8 @@ import 'package:mapsn/model/region.dart';
 
 class ArronsApi {
   static Future<List<Arron>> getArron(String query) async {
-    final url = Uri.parse('http://localhost:8080/api/arrondissements');
+    final url =
+        Uri.parse('http://localhost:8080/api/arrondissements');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

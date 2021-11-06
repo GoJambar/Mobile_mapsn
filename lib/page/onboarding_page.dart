@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mapsn/page/home_page.dart';
 import 'package:mapsn/widget/bootomBar.dart';
 import 'package:mapsn/widget/button_widget.dart';
 import 'package:mapsn/widget/splashsreen.dart';
@@ -43,7 +42,7 @@ class OnBoardingPage extends StatelessWidget {
           done: Text('Read', style: TextStyle(fontWeight: FontWeight.w600)),
           onDone: () => goToHome(context),
           showSkipButton: true,
-          skip: Text('Skip'),
+          skip: Text('Passer'),
           onSkip: () => goToHome(context),
           next: Icon(Icons.arrow_forward),
           dotsDecorator: getDotDecoration(),
@@ -60,7 +59,7 @@ class OnBoardingPage extends StatelessWidget {
       );
 
   void goToHome(context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => Splash()),
+        MaterialPageRoute(builder: (_) => BootomBarScreen()),
       );
 
   Widget buildImage(String path) =>
