@@ -24,8 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.4
-  introduction_screen: ^1.0.9
-
+  introduction_screen: ^2.1.0
+  dots_indicator: ^2.0.0
+  carousel_slider: ^4.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -68,10 +69,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Cairo
-  #     fonts:
-  #       - asset: assets/fonts/Cairo/Cairo-Regular.ttf
+  fonts:
+    - family: MyFlutterApp.ttf
+      fonts:
+        - asset: assets/MyFlutterApp.ttf
   #       - asset: assets/fonts/Cairo/Cairo-SemiBold.ttf
   #         weight: 600
   #       - asset: assets/fonts/Cairo/Cairo-Bold.ttf

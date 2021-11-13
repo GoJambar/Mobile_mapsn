@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mapsn/page/onboarding_page.dart';
 import 'package:mapsn/widget/bootomBar.dart';
 
 class Splash extends StatefulWidget {
@@ -15,9 +16,10 @@ class _SplashState extends State<Splash> {
   }
 
   _navigatetohome() async {
-    await Future.delayed(Duration(seconds: 5), () {});
+    await Future.delayed(Duration(seconds: 10), () {});
+
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => BootomBarScreen()));
+        context, MaterialPageRoute(builder: (context) => OnBoardingPage()));
   }
 
   @override

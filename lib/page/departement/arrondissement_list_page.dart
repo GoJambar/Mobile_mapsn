@@ -55,13 +55,13 @@ class _ArrondissmentPageState extends State<ArrondissmentPage> {
                           child: Container(
                             //padding: EdgeInsets.all(10),
                             child: Text(
-                              "Les circonscriptions administratives sont : la région, le département et l’arrondissement.La Région épartement est administré pionnaire du corps des Administrateurs civils nommé par décret et qui reçoit le titre de Sous-préfetLes chefs de circonscription sont :- Le Gouverneur pour la Région ;- Le Préfet pour le Département ;- Le Sous-préfet pour l’Arrondissement.",
+                              "l'arrondissement de ${widget.arron.name} est caractérisé par une superficie de ${widget.arron.superficie} Km2, une population de ${widget.arron.population} habitants, avec ${widget.arron.latitude} de latitude et ${widget.arron.longitute} de longitude",
                               textAlign: TextAlign.justify,
                               style: TextStyle(color: Colors.black),
                             ),
                           )),
                       SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
                     ],
                   ),

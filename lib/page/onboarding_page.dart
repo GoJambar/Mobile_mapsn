@@ -40,27 +40,29 @@ class OnBoardingPage extends StatelessWidget {
               decoration: getPageDecoration(),
             ),
           ],
-          done: Text('Read', style: TextStyle(fontWeight: FontWeight.w600)),
+          done: Text('Read',
+              style:
+                  TextStyle(fontWeight: FontWeight.w600, color: Colors.green)),
           onDone: () => goToHome(context),
           showSkipButton: true,
-          skip: Text('Skip'),
+          skip: Text('Skip', style: TextStyle(color: Colors.green)),
           onSkip: () => goToHome(context),
           next: Icon(Icons.arrow_forward),
           dotsDecorator: getDotDecoration(),
           onChange: (index) => print('Page $index selected'),
-          globalBackgroundColor: Theme.of(context).primaryColor,
-          skipFlex: 0,
-          nextFlex: 0,
+          //globalBackgroundColor: Theme.of(context).primaryColor,
+          //skipFlex: 0,
+          //nextFlex: 0,
           // isProgressTap: false,
           // isProgress: false,
-          // showNextButton: false,
+          showNextButton: false,
           // freeze: true,
           // animationDuration: 1000,
         ),
       );
 
   void goToHome(context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => Splash()),
+        MaterialPageRoute(builder: (_) => BootomBarScreen()),
       );
 
   Widget buildImage(String path) =>
@@ -68,7 +70,7 @@ class OnBoardingPage extends StatelessWidget {
 
   DotsDecorator getDotDecoration() => DotsDecorator(
         color: Color(0xFFBDBDBD),
-        //activeColor: Colors.orange,
+        activeColor: Colors.green,
         size: Size(10, 10),
         activeSize: Size(22, 10),
         activeShape: RoundedRectangleBorder(
@@ -78,7 +80,7 @@ class OnBoardingPage extends StatelessWidget {
 
   PageDecoration getPageDecoration() => PageDecoration(
         titleTextStyle: TextStyle(
-            fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blue),
+            fontSize: 28, fontWeight: FontWeight.bold, color: Colors.green),
         bodyTextStyle: TextStyle(fontSize: 20),
         descriptionPadding: EdgeInsets.all(16).copyWith(bottom: 0),
         imagePadding: EdgeInsets.all(24),

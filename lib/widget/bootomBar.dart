@@ -4,6 +4,8 @@ import 'package:mapsn/page/commun/commun_list_page.dart';
 import 'package:mapsn/page/departement/departement_list_page.dart';
 import 'package:mapsn/page/region/region_list_page.dart';
 
+import '../icons.dart';
+
 class BootomBarScreen extends StatefulWidget {
   BootomBarScreen() : super();
 
@@ -37,26 +39,26 @@ class _BootomBarScreenState extends State<BootomBarScreen> {
       body: tabs[currentTabIndex],
       bottomNavigationBar: BottomNavigationBar(
         //backgroundColor: Colors.blueGrey,
-        backgroundColor: Colors.grey[600],
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.green,
+        backgroundColor: Colors.blue,
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.black,
         onTap: onTapped,
         currentIndex: currentTabIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(MyFlutterApp.table),
             label: "Regions",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance),
+            icon: Icon(MyFlutterApp.list_alt),
             label: "Departement",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_outlined),
+            icon: Icon(MyFlutterApp.th_large),
             label: "Arrondissement",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_rounded),
+            icon: Icon(MyFlutterApp.menu),
             label: "Commun",
           ),
         ],
